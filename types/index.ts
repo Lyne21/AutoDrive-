@@ -25,9 +25,8 @@ interface Reservation {
     utilisateurId: number;
     dateDebut: Date;
     dateFin: Date;
-    statut: string; 
+    statut: ReservationStatus; 
     prixTotal: number;
-    status: ReservationStatus
 }
 
 

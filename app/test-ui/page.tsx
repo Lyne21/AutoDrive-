@@ -1,3 +1,5 @@
+
+
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -14,6 +16,10 @@ import {
 } from "@/components/ui/card"
 
 const Testui = () => {
+    console.log("Coté serveur:", process.env.DATABASE_URL);
+    console.log("Coté client:", process.env.NEXT_PUBLIC_API_URL);
+
+
   return (
     <div >
         <Label>Accept variant</Label>
@@ -32,6 +38,9 @@ const Testui = () => {
         <Button>Valider</Button>
       </CardFooter>
     </Card>
+    
+        
+
     </div>
   )
 }
