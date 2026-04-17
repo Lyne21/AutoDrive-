@@ -1,8 +1,14 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 
-Lib/ external setup , pour utiliser des bibliothèque externe 
-
+api/ ---->  Pour les appels api 
+components/ ----> 
+lib/ ---->
+actions/ ---->
+hooks/ ---->
+app/ ---->
+types/ ---->
+utils/ ---->
 
 
 
