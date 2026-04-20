@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User { 
+  id    String     @id @default(cuid()) 
+  last_name  String
+  first_name String
+  email String  @unique
+  password String @unique
+  createdAt   DateTime  @default(now())
+  //Un utilisateur a une liste de reservation (1-to-many) tableau
+  reservation Reservation[]
+  role Role @default(USER)
+
+} 
+
+model Voiture {
+  id           String    @id @default(cuid()) 
+  marque       String 
+  modele       String 
+  prix_location Decimal 
+  disponible   Boolean   @default(true) 
+  reservations Reservation[] 
+} 
+  
+model Reservation { 
+  id         String   @id @default(cuid()) 
+  startDate  DateTime
+  endDate    DateTime
+  user       User     @relation(fields: [userId], references: [id]) 
+  userId     String   // Clé étrangère 
+  voiture    Voiture  @relation(fields: [voitureId], references: [id]) 
+  voitureId  String 
+  statut     ReservationStatus @default(PENDING) 
+}
+
+enum ReservationStatus {
+  PENDING
+  CANCELLED 
+  CONFIRMED 
+  COMPLETED
+  }
+
+enum Role {
+  USER 
+  ADMIN
+}

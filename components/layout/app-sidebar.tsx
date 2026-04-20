@@ -48,7 +48,7 @@ const menuItems =[
 
 export function AppSidebar() {
   return (
-    <Sidebar >
+    <Sidebar variant="floating">
       <SidebarHeader />
       <SidebarContent >
         <SidebarGroup />

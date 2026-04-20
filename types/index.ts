@@ -22,7 +22,7 @@ interface User {
 interface Reservation {
     id: number;
     voitureId: number;
-    utilisateurId: number;
+    userId: number;
     dateDebut: Date;
     dateFin: Date;
     statut: ReservationStatus; 
