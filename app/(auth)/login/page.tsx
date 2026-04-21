@@ -5,9 +5,19 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from '@/components/ui/badge'
+import { login } from '@/actions/login'
 
 
 const Login = () => {
+
+    const handleLogin  = async (formData : FormData) => {
+        const result = await login (formData)
+        if(result?.success){
+           alert( result.success)
+        }
+    }
+
+
   return (
     <main className=' w-full min-h-screen flex items-center justify-center bg-gray-50 p-4'>
         <div className='w-full max-w-md border rounded-2xl p-6 bg-white'>
@@ -25,7 +35,7 @@ const Login = () => {
                 </div>
 
             {/* Form */}
-                    <form action="" className='flex flex-col gap-4'>
+                    <form action={handleLogin} className='flex flex-col gap-4'>
                         
             
                         <div className='flex flex-col gap-4'>
@@ -50,7 +60,7 @@ const Login = () => {
                             <a href="/login" className='text-blue-700'>Mot de passe oublié?</a>
                         </div>
                                 
-                                <Button className='w-full'>Se connecter</Button>
+                                <Button className='w-full' type='submit'>Se connecter</Button>
                         </div>
                         
                     </form>

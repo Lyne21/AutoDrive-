@@ -5,9 +5,24 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from '@/components/ui/badge'
+import { register } from '@/actions/register'
 
 
 const Register = () => {
+
+    const handleRegister = async (formData : FormData ) => {
+        
+        const result = await register (formData);
+
+        if (result?.error){
+            alert(result.error)
+        }
+
+        if (result?.success){
+            alert(result.success)
+        }
+    };
+
   return (
     <main className='w-full min-h-screen  flex items-center justify-center bg-gray-50 p-4'>
         {/* Card du formulair */}
@@ -26,7 +41,7 @@ const Register = () => {
         </div>
 
        {/* Form */}
-        <form action="" className='flex flex-col gap-4'>
+        <form action={handleRegister} className='flex flex-col gap-4'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
                 <div>
                 <Label>Nom</Label>
@@ -73,12 +88,17 @@ const Register = () => {
                     <Input
                         type='password'
                         placeholder='......'
-                        name='password'
+                        name='confirm-password'
                         required
                         
                     />
 
-                    <Button className='w-full'>Créer mon compte</Button>
+                    <Button 
+                        type='submit'
+                        className='w-full' 
+                    >
+                        Créer mon compte
+                    </Button>
             </div>
             <div className='flex justify-center'>
                 Déjà un compte? <a href="/login" className='text-blue-700'>Connectez-vous</a>
