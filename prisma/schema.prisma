@@ -4,13 +4,12 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../lib/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url= env("DATABASE_URL")
 }
 
 
@@ -24,13 +23,16 @@ model User {
   //Un utilisateur a une liste de reservation (1-to-many) tableau
   reservation Reservation[]
   role Role @default(USER)
+  account Account[]
+  session Session[]
 
 } 
+
+
 
 model Voiture {
   id           String    @id @default(cuid()) 
   marque       String 
-  modele       String 
   prix_location Decimal 
   disponible   Boolean   @default(true) 
   reservations Reservation[] 
@@ -46,6 +48,61 @@ model Reservation {
   voitureId  String 
   statut     ReservationStatus @default(PENDING) 
 }
+
+model Account {
+  userId            String      
+  type              String          //indique si c'est du OAuth ou du OIDC
+  provider          String           // nom du service externe (google ou autre)
+  providerAccountId String          //l'identifiant unique que renvoie le service externe
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([provider, providerAccountId])
+}
+ 
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+ 
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@id([identifier, token])
+}
+ 
+// Optional for WebAuthn support
+// model Authenticator {
+//   credentialID         String  @unique
+//   userId               String
+//   providerAccountId    String
+//   credentialPublicKey  String
+//   counter              Int
+//   credentialDeviceType String
+//   credentialBackedUp   Boolean
+//   transports           String?
+ 
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+//   @@id([userId, credentialID])
+// }
 
 enum ReservationStatus {
   PENDING
