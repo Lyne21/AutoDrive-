@@ -7,6 +7,8 @@ import { Label } from "@/components/ui/label"
 import { Badge } from '@/components/ui/badge'
 import { login } from '@/actions/login'
 
+import { db } from "@/lib/db"
+
 
 const Login = () => {
 
@@ -57,7 +59,7 @@ const Login = () => {
                                     
                                 />
                         <div className='flex justify-end'>
-                            <a href="/login" className='text-blue-700'>Mot de passe oublié?</a>
+                            <a href="/forgot-password" className='text-blue-700'>Mot de passe oublié?</a>
                         </div>
                                 
                                 <Button className='w-full' type='submit'>Se connecter</Button>

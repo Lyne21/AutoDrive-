@@ -11,6 +11,7 @@ import {
   SidebarMenuButton
 } from "@/components/ui/sidebar"
 import { Car, LayoutDashboard, Settings, CalendarDays, CarIcon } from "lucide-react"
+import {logout} from "@/actions/logout"
 
 const menuItems =[
     {
@@ -68,7 +69,7 @@ export function AppSidebar() {
         <SidebarGroup />
       </SidebarContent>
       <SidebarFooter>
-        
+        <SidebarMenuButton onClick={async () => await logout()}>Se déconnecter</SidebarMenuButton>
       </SidebarFooter>
     </Sidebar>
   )

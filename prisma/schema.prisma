@@ -104,6 +104,14 @@ model VerificationToken {
 //   @@id([userId, credentialID])
 // }
 
+model PasswordResetToken{
+  id     String
+  email  String
+  token  String @unique
+  expireAt  DateTime
+  createdAt  DateTime @default(now())
+}
+
 enum ReservationStatus {
   PENDING
   CANCELLED 

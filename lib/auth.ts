@@ -42,4 +42,22 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
+
+  callbacks:{
+    async jwt({token, user}){
+        if(user){
+            token.first_name = (user as any).first_name;
+            token.last_name = (user as any).last_name;
+        }
+        return token;
+    },
+
+    async session ({session, token }){
+        if(token && session.user){
+            (session.user as any).first_name= token.first_name as string;
+            (session.user as any).last_name = token.last_name as string;
+        }
+        return session;
+    },
+  }
 })
