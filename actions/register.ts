@@ -1,7 +1,6 @@
 "use server"
 import { db } from "@/lib/db"
 import bcrypt from "bcryptjs"
-import { error } from "console";
 
 export const register = async (formData: FormData) => {
 

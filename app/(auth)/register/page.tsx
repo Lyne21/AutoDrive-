@@ -37,7 +37,7 @@ const Register = () => {
             <div className='flex gap-2 '>
             <h1 className='font-bold'>Créer un compte </h1> <Badge className='bg-blue-50 text-blue-950 dark:bg-blue-950 dark:text-blue-300 mt-1'>Gratuit</Badge>
             </div>
-            <div>Louez ou achetz en un cli</div>
+            <div>Louez ou achetez en un cli</div>
         </div>
 
        {/* Form */}
