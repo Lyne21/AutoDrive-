@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import {auth} from "@/lib/auth"
+import {voitureSchema} from "@/lib/zod"
 
 export async function GET(request:Request){
     
@@ -31,10 +32,19 @@ export async function POST (request:Request) {
     
     try {
         const body = await request.json ();
+        const validation = voitureSchema.safeParse(body)
+
+        //Vérification de la validation  (si zod n'est pas correcte ou bien vérifié)
+        if (!validation.success){
+            return NextResponse.json({error:"Erreur lors des entrés"} , {status:400})
+        } else {
+            return NextResponse.json({message:"Voiture créer"})
+        }
+
     const newCar =  await db.voiture.create({
         data:{
-            marque : body.marque,
-            prix_location: body.prix_location,
+            marque : body.data.marque,
+            prix_location: body.data.prix_location,
         }
     });
 

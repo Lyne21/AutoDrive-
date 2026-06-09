@@ -1,7 +1,7 @@
 import {z} from "zod"
 
 
-const registerSchema = z.object({
+export const registerSchema = z.object({
     last_name : z.string().trim().min(1, {message: "Remplissez tous les champs"}),
     first_name : z.string().trim().min(1, {message :"Remplissez tous les champs"}),
     email: z.string().trim().email("Mettez un email valide"),
@@ -13,7 +13,7 @@ const registerSchema = z.object({
 });
 
 
-const voitureSchema = z.object ({
+export const voitureSchema = z.object ({
     marque : z.string().trim().min(1),
     prix_location : z.coerce.number({
         invalid_type_error: "Le prix doit être un nombre"
@@ -23,7 +23,7 @@ const voitureSchema = z.object ({
     }).default(true),
 });
 
-const reservationSchema = z.object({
+export const reservationSchema = z.object({
     voiture_id : z.string({
         required_error: "Veuillez selectionnez un véhicule" 
     }),
