@@ -74,7 +74,7 @@ const page = () => {
           <CardContent className="p-4 space-y-2">
             <div className="flex justify-between items-center">
               <CardTitle className="text-xl font-bold">{voiture.marque}</CardTitle>
-              <Badge>{voiture.disponible}</Badge>
+              <Badge variant={voiture.disponible? "default" : "destructive"} >{voiture.disponible? "Disponible" : "Indisponible"}</Badge>
             </div>
             <CardDescription>{voiture.type}</CardDescription>
           </CardContent>
@@ -82,7 +82,7 @@ const page = () => {
           <CardFooter className="p-4 border-t flex justify-between items-center">
             <div>
               <p className="text-xs text-gray-500">Tarif</p>
-              <p className="text-lg font-bold text-blue-600">{voiture.tarif} FCFA <span className="text-xs font-normal text-gray-500">/ jour</span></p>
+              <p className="text-lg font-bold text-blue-600">{voiture.tarif.toLocaleString()} FCFA <span className="text-xs font-normal text-gray-500">/ jour</span></p>
             </div>
             <Button>Voir</Button>
           </CardFooter>
