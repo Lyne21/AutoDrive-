@@ -34,6 +34,7 @@ model Voiture {
   id           String    @id @default(cuid()) 
   marque       String 
   prix_location Decimal 
+  image         String?
   disponible   Boolean   @default(true) 
   reservations Reservation[] 
 } 

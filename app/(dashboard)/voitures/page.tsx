@@ -10,47 +10,50 @@ import {
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image";
 import { Button } from "@/components/ui/button"
+import { db } from '@/lib/db';
 
 
-const page = () => {
+const page = async () => {
 
- const catalogueVoiture = [
-   {
-     id : "1",
-     marque: "Toyota",
-     type: "SUV",
-     tarif: 40000,
-     disponible: true,
-     image: "",
-   },
+//  const catalogueVoiture = [
+//    {
+//      id : "1",
+//      marque: "Toyota",
+//      type: "SUV",
+//      tarif: 40000,
+//      disponible: true,
+//      image: "",
+//    },
 
-   {
-     id: "2",
-     marque: "Tesla",
-     type: "SUV",
-     tarif: 40000,
-     disponible: true,
-     image: "",
-   },
+//    {
+//      id: "2",
+//      marque: "Tesla",
+//      type: "SUV",
+//      tarif: 40000,
+//      disponible: true,
+//      image: "",
+//    },
 
-   {
-     id: "3",
-     marque: "RAV4",
-     type: "SUV",
-     tarif: 40000,
-     disponible: true,
-     image: "",
-   },
+//    {
+//      id: "3",
+//      marque: "RAV4",
+//      type: "SUV",
+//      tarif: 40000,
+//      disponible: true,
+//      image: "",
+//    },
 
-   {
-     id: "4",
-     marque: "Lomborghini",
-     type: "SUV",
-     tarif: 40000,
-     disponible: false,
-     image: "",
-   },
- ]
+//    {
+//      id: "4",
+//      marque: "Lomborghini",
+//      type: "SUV",
+//      tarif: 40000,
+//      disponible: false,
+//      image: "",
+//    },
+//  ]
+
+const catalogueVoiture = await db.voiture.findMany();
   
   return (
     <div>
@@ -67,7 +70,7 @@ const page = () => {
 
           <CardHeader className="p-0"> 
             <div className="relative w-full  bg-gray-100">
-              {voiture.image}
+              {/* {voiture.image} */}
             </div>
           </CardHeader>
 
@@ -76,13 +79,13 @@ const page = () => {
               <CardTitle className="text-xl font-bold">{voiture.marque}</CardTitle>
               <Badge variant={voiture.disponible? "default" : "destructive"} >{voiture.disponible? "Disponible" : "Indisponible"}</Badge>
             </div>
-            <CardDescription>{voiture.type}</CardDescription>
+            {/* <CardDescription>{voiture.type}</CardDescription> */}
           </CardContent>
 
           <CardFooter className="p-4 border-t flex justify-between items-center">
             <div>
               <p className="text-xs text-gray-500">Tarif</p>
-              <p className="text-lg font-bold text-blue-600">{voiture.tarif.toLocaleString()} FCFA <span className="text-xs font-normal text-gray-500">/ jour</span></p>
+              <p className="text-lg font-bold text-blue-600">{voiture.prix_location.toLocaleString()} FCFA <span className="text-xs font-normal text-gray-500">/ jour</span></p>
             </div>
             <Button>Voir</Button>
           </CardFooter>
